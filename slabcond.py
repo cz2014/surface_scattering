@@ -7,7 +7,46 @@ Cyes = 0
 Cno = 0
 
 class SlabCond(BandStruct):
-    """ class of slab conductivity. """
+    """ 
+    Main driver for calculating slab conductivity with relaxation approximation.
+
+    Parameters:
+    ----------
+    ngd: list of int 
+        Number of grid points in each desired direction.
+    filvel: str
+        Filename containing the electronic group velocity data.
+    fs0: float, optional
+        Initial Fermi surface value. Default is 0.
+    fsthick: float, optional
+        Thickness of the Fermi surface. Default is 0.15.
+    assume_metal: bool, optional
+        Whether to assume the material is metallic. Default is True.
+    isibz: bool, optional
+        Use irreducible Brillouin Zone. Default is True.
+    filinfo: str, optional
+        Filename for QE standard output with lattice symmetry matrics. Default is 'hex.info'.
+    fillw: str, optional
+        Filename for electron self-energy due to e-ph scattering. Default is None.
+    filpwc: str, optional
+        Filename for PWCOND output. Default is None.
+    slabwidth: float, optional
+        Width of the slab, in unit of Angstroms. Default is 1.
+    bc: tuple of 0 or 1, optional
+        Boundary conditions for the film surfaces. Each element is 0 (without surface) or 1 (with surface). Default is (0, 0).
+    area: float, optional
+        Volume of the bulk unit cell in units of A^3 (cubic Angstroms). Default is 1.
+    ibrav: int, optional
+        Bravais lattice index. See `grids.py` for detailed lattice vectors. Default is 4 for hexagonal lattice.
+    spsym: bool, optional
+        Special treatment of lattice symmetry. Options are 'nosym' to remove all lattice symmetry, 'noz' to remove symmetry related to the z-axis. Default is None.
+    fixedp: float, optional
+        Fixed specular parameter for e-s scattering. Mainly for test purpose. Default is None.
+    fixedtau: float, optional 
+        Fixed relaxation times. Mainly for test purpose. Default is None.
+    fixrmat: bool, optional
+        Whether to correct the reflection coefficient using velocity. Default is True.
+    """
 
     def __init__(self, ngd, filvel, fs0=0, fsthick=0.15, assume_metal=True, isibz=True, filinfo='hex.info', fillw=None, filpwc=None, slabwidth=1, bc=(0,0), area=1, ibrav=4, spsym=None, fixedp=None, fixedtau=None, fixrmat=True):
         GridPts.__init__(self, ngd=ngd, ibrav=ibrav, spsym=spsym)

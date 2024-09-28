@@ -7,7 +7,56 @@ import os.path
 import copy
 
 class IterSlabCond(SlabCond):
-    """ a more advanced version of slab conductivity class"""
+    """ 
+    Main driver for calculating slab conductivity using an iterative solution.
+
+    Parameters:
+    ----------
+    ngd: list of int
+        Number of grid points in each desired direction.
+    filvel: str
+        Filename containing the electronic group velocity data.
+    fs0: float, optional
+        Initial Fermi level value. Default is 0.
+    fsthick: float, optional
+        Thickness of the Fermi surface. Default is 0.15.
+    assume_metal: bool, optional
+        Whether to assume the material is metallic. Default is True.
+    isibz: bool, optional
+        Use the irreducible Brillouin Zone. Default is True.
+    filinfo: str, optional
+        Filename for QE standard output with lattice symmetry matrices. Default is 'hex.info'.
+    fillw: str, optional
+        Filename for electron self-energy due to e-ph scattering. Default is None.
+    filpwc: str, optional
+        Filename for PWCOND output. Default is None.
+    slabwidth: float, optional
+        Width of the slab, in units of Angstroms. Default is 1.
+    bc: tuple of int (0 or 1), optional
+        Boundary conditions for the film surfaces. Each element is 0 (without surface) or 1 (with surface). Default is (0, 0).
+    area: float, optional
+        Volume of the bulk unit cell in units of A^3 (cubic Angstroms). Default is 1.
+    ibrav: int, optional
+        Bravais lattice index. See `grids.py` for detailed lattice vectors. Default is 4 for hexagonal lattice.
+    spsym: str or None, optional
+        Special treatment of lattice symmetry. Options are 'nosym' to remove all lattice symmetry, 'noz' to remove symmetry related to the z-axis. Default is None.
+    ----------
+    filg2m: str, optional
+        Filename containing e-ph coupling matrix elements (|g|^2 data). Default is 'fort.709'.
+    nqg: list of int, optional
+        Number of grid points in each desired direction for the phonon q-grid. Default is None.
+    nz: int, optional
+        Number of grid points in the z-direction for the slab. Default is 1.
+    bcmod: str, optional
+        Boundary condition mode for the iterative BTE solver. Options are 'periodic', 'simpleFS', or 'complexFS'. Default is 'periodic'.
+
+    Notes:
+    ------
+    - **bcmod** specifies the type of boundary condition used in the calculation:
+        - `'periodic'`: Periodic boundary conditions.
+        - `'simpleFS'`: Simple Fermi surface boundary conditions.
+        - `'complexFS'`: Complex Fermi surface boundary conditions.
+    """
 
     def __init__(
         self, ngd, filvel, fs0=0, fsthick=0.15, assume_metal=True, isibz=True, filinfo='hex.info', fillw=None, filpwc=None, slabwidth=1, bc=(0,0), area=1, ibrav=4, spsym=None,
