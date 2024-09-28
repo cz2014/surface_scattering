@@ -1,6 +1,6 @@
 # surface_scattering
 
-<img src="es2.jpg" alt="Surface Scattering Illustration" height="150">
+<img src="es2.jpg" alt="Surface Scattering Illustration" height="180">
 
 Solves the spatial Boltzmann Transport Equation (BTE) to evaluate finite-size resistivity in films, accounting for electron-surface and electron-phonon scattering.
 
