@@ -1,0 +1,46 @@
+&control
+ calculation = 'scf'
+ prefix = "Cu"
+ pseudo_dir = "./"
+ outdir = "./"
+ verbosity = 'high'
+ wf_collect=.true.
+ etot_conv_thr = 1.0D-6
+ forc_conv_thr = 1.0D-5
+/
+&system
+ ibrav = 8
+ celldm(1) = 4.8506908360
+ celldm(2) = 1.4142135624
+ celldm(3) = 1.0000000000
+ nat = 2
+ ntyp = 1
+ ecutwfc = 30.0
+ ecutrho = 300.0
+ occupations='smearing', 
+ smearing='mv', 
+ degauss=0.01 ! 0.0019 for room T
+!vdw_corr = 'grimme-d2'
+!noncolin = .true.
+!lspinorb = .true.
+ nbnd = 36
+/
+&electrons
+ electron_maxstep = 300
+ conv_thr =  1.0e-10
+/
+&ions
+/
+&cell
+!  cell_dofree='z'
+/
+
+ATOMIC_SPECIES
+Cu         63.546        Cu.pbe-n-van_ak.UPF
+
+ATOMIC_POSITIONS crystal
+Cu            0.0000000000        0.0000000000        0.0000000000
+Cu            0.5000000000        0.5000000000        0.5000000000
+
+K_POINTS automatic
+18 12 18 0 0 0
