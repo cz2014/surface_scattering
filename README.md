@@ -70,6 +70,9 @@ print(f'Conductivity, x: {cond[0,0]:10.4e} y: {cond[1,1]:10.4e} S/m')
 plt.show()
 ```
 
+(03.07.2025) An Cu(110) film example has been updated. See `slabcond_example.py` for script and Cu110_example folder for necessary files.
+
+
 ## References
 More details can be found at: https://pubs.acs.org/doi/full/10.1021/acsnano.4c07698
 
